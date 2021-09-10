@@ -29,5 +29,12 @@ def Link(Lk):
 >>>>>>> test
 
 
+
+
+
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(debug = True)
+=======
+    app.run()
+>>>>>>> 6e7f9012868085812efe0da3898b8ce5c1669598
