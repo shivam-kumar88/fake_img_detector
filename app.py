@@ -24,7 +24,10 @@ def upload():
     
 @app.route("/<Lk>")
 def Link(Lk):
-    return f"<h1>{Lk}</h1>"
+    #return f"<h1>{Lk}</h1>"
+    return render_template(
+        "up_suc.html",
+        Lk = Lk,)
 
 if __name__ == '__main__':
     app.run(debug = True)
