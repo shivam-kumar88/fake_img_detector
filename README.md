@@ -9,7 +9,7 @@ This is a ml based project:
  dissimilrities between the two image and if the image is fake then that will also be mentioned there. 
 
 
-Feel free to Contribute after going through the codebase :) .
+---------------------Feel free to Contribute after going through the codebase :) .---------------------
 
 
 [model link](https://colab.research.google.com/drive/1WDXpT7lteCrbL2ROrYgG73_fwWgvIjdR?usp=sharing)
