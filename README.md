@@ -12,4 +12,4 @@ This is a ml based project:
 Feel free to Contribute after going through the codebase :) .
 
 
-model link -  https://colab.research.google.com/drive/1WDXpT7lteCrbL2ROrYgG73_fwWgvIjdR?usp=sharing
+[model link](https://colab.research.google.com/drive/1WDXpT7lteCrbL2ROrYgG73_fwWgvIjdR?usp=sharing)
