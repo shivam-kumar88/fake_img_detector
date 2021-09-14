@@ -13,10 +13,11 @@ from io import BytesIO
 
 app = Flask(__name__)
 
+ssim = 1
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("home.html")
 
 
 @app.route("/upload", methods=["POST", "GET"])
@@ -30,8 +31,8 @@ def upload():
         print("linkof picture 2: ", link2)
 
             #requesting the link on web for content
-        ige1 = requests.get('https://images.unsplash.com/photo-1631465416799-02880b27977e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80')
-        ige2 = requests.get('https://images.unsplash.com/photo-1631465416799-02880b27977e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80')
+        ige1 = requests.get(link1)
+        ige2 = requests.get(link2)
 
             #getting the content of the page
         ig1 = Image.open(BytesIO(ige1.content))
@@ -47,16 +48,39 @@ def upload():
         print(ig1_size)
         print(ig1_size)
 
+        ig1_resize = ig1.resize((250,150))
+        ig2_resize = ig2.resize((250,150))
+
+        ig1_resize.save(r"D:\flask projects\fake_image_detector\resorse_image\images\img1_resized.png")
+        ig2_resize.save(r"D:\flask projects\fake_image_detector\resorse_image\images\img2_resized.png")
+
+        image_1 = cv2.imread(r"D:\flask projects\fake_image_detector\resorse_image\images\img1_resized.png")
+        image_2 = cv2.imread(r"D:\flask projects\fake_image_detector\resorse_image\images\img2_resized.png")
+
+        image_1_gray = cv2.cvtColor(image_1, cv2.COLOR_BGR2GRAY)
+        image_2_gray = cv2.cvtColor(image_2, cv2.COLOR_BGR2GRAY)
+
+        print("image-1 = ", image_1_gray)
+        print("image-2 - ", image_2_gray)
+
+        (score, diff) = structural_similarity(image_1_gray, image_2_gray, full=True)
+        ssim_per = score*100
+        print(ssim_per)
+        global ssim
+        ssim= ssim_per
+
         return redirect(url_for("Link", Lk = Name))
     else:
         return render_template("upload.html")
+
     
 @app.route("/<Lk>")
 def Link(Lk):
     #return f"<h1>{Lk}</h1>"
     return render_template(
         "up_suc.html",
-        Lk = Lk,)
+        Lk = Lk,
+        ssim_s = ssim)
 
 
 
